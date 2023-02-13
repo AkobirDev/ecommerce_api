@@ -9,14 +9,18 @@ OrderListView, \
 ProductDetailView, \
 ProductListView, \
 CategoryDetailView
-from users.views import UserView \
+from reviews.views import ReviewsView
+from users.views import UserView
 
+user_router = routers.DefaultRouter()
+user_router.register(r'users', UserView, basename='user')
 
-router = routers.DefaultRouter()
-router.register(r'users', UserView, basename='user')
+review_router = routers.DefaultRouter()
+review_router.register(r'reviews', ReviewsView, basename='review')
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', include(user_router.urls)),
+    path('', include(review_router.urls)),
     path('products/', ProductListView.as_view(), name='product-list'),
     path('products/<int:pk>', ProductDetailView.as_view(), name='products-detail'),
     path('categories/', CategoryListView.as_view(), name='category-list'),
