@@ -37,8 +37,6 @@ class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     ordered_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.id
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
