@@ -45,7 +45,15 @@ class OrderListView(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
 class OrderDetailView(ListAPIView):
-    queryset = OrderItem.objects.all()
+    # queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        order_id = self.kwargs['pk']
+        order = Order.objects.get(pk=order_id)
+        order_items = OrderItem.objects.filter(order=order)
+        return order_items
+
+
+    

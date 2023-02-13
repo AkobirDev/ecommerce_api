@@ -33,14 +33,14 @@ class Product(models.Model):
         ordering = ('-created_at',)
 
 class Order(models.Model):
-    # product = models.ForeignKey(Product, on_delete = models.CASCADE)
+    product = models.ForeignKey(Product, on_delete = models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     ordered_at = models.DateTimeField(auto_now_add=True)
     
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     quantity = models.IntegerField()
 
     def __str__(self):
