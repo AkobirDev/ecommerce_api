@@ -11,7 +11,8 @@ class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = ('name', 'category', 'price', 'discount',
+                   'image', 'created_at', 'get_price')
 
 # class ProductCategorySerializer(serializers.ModelSerializer):
 #     product = ProductSerializer()

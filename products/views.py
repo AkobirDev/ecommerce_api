@@ -6,8 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView, ListAPIView, ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework import status
-from products.serializers import CategorySerializer , ProductSerializer
-from products.models import Category, Product 
+from products.serializers import CategorySerializer, OrderItemSerializer, OrderSerializer , ProductSerializer
+from products.models import Category, Order, OrderItem, Product 
 # Create your views here
 
 class ProductListView(ListCreateAPIView):
@@ -39,4 +39,13 @@ class CategoryDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated | ReadOnly]
 
-   
+class OrderListView(ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+class OrderDetailView(ListAPIView):
+    queryset = OrderItem.objects.all()
+    serializer_class = OrderItemSerializer
+    permission_classes = [IsAuthenticated]
+

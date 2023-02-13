@@ -8,14 +8,14 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     
 class Product(models.Model):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.FloatField()
-    discount = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)], blank=True, null=True)
-    image = models.ImageField(upload_to='media/products')
+    discount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], blank=True, null=True)
+    image = models.ImageField(upload_to='products')
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -36,7 +36,7 @@ class Order(models.Model):
     # product = models.ForeignKey(Product, on_delete = models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     ordered_at = models.DateTimeField(auto_now_add=True)
-
+    
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
