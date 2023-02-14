@@ -19,6 +19,7 @@ user_router.register(r'users', UserView, basename='user')
 review_router = routers.DefaultRouter()
 review_router.register(r'reviews', ReviewsView, basename='review')
 
+app_name = 'api'
 urlpatterns = [
     path('', include(user_router.urls)),
     path('', include(review_router.urls)),
