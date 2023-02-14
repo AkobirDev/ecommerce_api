@@ -5,4 +5,4 @@ from users.models import CustomUser
 # Register your models here.
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email']
+    list_display = ['username', 'email', 'password']

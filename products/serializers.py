@@ -12,16 +12,8 @@ class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     class Meta:
         model = Product
-        fields = ('name', 'category', 'price', 'discount','rating',
-                   'image','get_price', 'created_at', )
-
-# class ProductCategorySerializer(serializers.ModelSerializer):
-#     product = ProductSerializer()
-#     category = CategorySerializer()
-#     class Meta:
-#         model = ProductCategory
-#         fields = '__all__'
-
+        fields = ('id', 'name', 'category', 'price', 'discount',
+                  'rating','image','get_price', 'created_at', )
 
 class OrderSerializer(serializers.ModelSerializer):
     user = UserSerializer()
