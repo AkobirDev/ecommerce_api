@@ -16,7 +16,8 @@ class ProductListView(ListCreateAPIView):
     queryset = Product.objects.all().order_by('id')
     serializer_class = ProductSerializer
     filter_backends = [filter.DjangoFilterBackend]
-    filter_classes = ProductFilter
+    filterset_fields = ('category__name', 'name')
+    # filter_classes = ProductFilter
     permission_classes = [IsAdminUser | ReadOnly]
 
 class ProductDetailView(RetrieveUpdateDestroyAPIView):
