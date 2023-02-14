@@ -1,7 +1,6 @@
 from django.db import models
 
 from products.models import Order
-from users.models import CustomUser
 
 # Create your models here.
 
@@ -9,7 +8,7 @@ from users.models import CustomUser
 
 class Payment(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=6, decimal_places=2)
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
     PAYMENT_CHOICES = (
         ('CASH', 'CASH'),
         ('CARD', 'CARD'),
