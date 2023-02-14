@@ -39,7 +39,7 @@ class CategoryDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated | ReadOnly]
 
-class OrderListView(ListCreateAPIView):
+class OrderListView(ListAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]

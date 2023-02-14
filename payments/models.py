@@ -1,6 +1,7 @@
 from django.db import models
 
 from products.models import Order
+from users.models import CustomUser
 
 # Create your models here.
 
@@ -15,3 +16,6 @@ class Payment(models.Model):
     )
     payment_method = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default='CASH')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'payment for {self.order.user.username}'

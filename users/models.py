@@ -6,5 +6,9 @@ class CustomUser(AbstractUser):
     phone_number = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=300, blank=True, null=True)
 
+    def __str__(self):
+        return self.username
+
     class Meta:
         ordering = ('-date_joined',)
+

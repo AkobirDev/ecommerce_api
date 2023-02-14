@@ -38,7 +38,8 @@ class Order(models.Model):
     is_ordered = models.BooleanField(default=False)
     ordered_at = models.DateTimeField(auto_now_add=True)
 
-
+    def __str__(self):
+        return f'{self.user} ordered'
 
 
 class OrderItem(models.Model):

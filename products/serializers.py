@@ -16,7 +16,7 @@ class ProductSerializer(serializers.ModelSerializer):
                   'rating','image','get_price', 'created_at', )
 
 class OrderSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Order
         fields = ('id', 'user', 'is_ordered', 'ordered_at',)
