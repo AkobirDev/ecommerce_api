@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django_filters import rest_framework as filter
+from products.filters import ProductFilter
 from products.permissions import ReadOnly
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.mixins import CreateModelMixin
@@ -13,20 +15,14 @@ from products.models import Category, Order, OrderItem, Product
 class ProductListView(ListCreateAPIView):
     queryset = Product.objects.all().order_by('id')
     serializer_class = ProductSerializer
+    filter_backends = [filter.DjangoFilterBackend]
+    filter_classes = ProductFilter
     permission_classes = [IsAdminUser | ReadOnly]
 
 class ProductDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAdminUser | ReadOnly]
-
-# class ProductCategoryList(ListCreateAPIView):
-#     queryset = ProductCategory.objects.all()
-#     serializer_class = ProductCategorySerializer
-
-# class ProductCategoryDetail(RetrieveUpdateDestroyAPIView):
-#     queryset = ProductCategory.objects.all()
-#     serializer_class = ProductCategorySerializer
 
 class CategoryListView(ListCreateAPIView):
     queryset = Category.objects.all()
