@@ -33,10 +33,13 @@ class Product(models.Model):
         ordering = ('-created_at',)
 
 class Order(models.Model):
-    product = models.ForeignKey(Product, on_delete = models.CASCADE)
+    # product = models.ForeignKey(Product, on_delete = models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
+    is_ordered = models.BooleanField(default=False)
     ordered_at = models.DateTimeField(auto_now_add=True)
-    
+
+
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
@@ -46,8 +49,5 @@ class OrderItem(models.Model):
     def __str__(self):
         return f'{self.quantity} {self.product} by {self.order}'
 
-class ShippingAddress(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
-    address = models.CharField(max_length=300)
-    created_at = models.DateTimeField(auto_now_add=True)
+    def get_total_product_price(self):
+        return self.product.get_price() * self.quantity

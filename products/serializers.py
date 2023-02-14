@@ -19,11 +19,11 @@ class OrderSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ('id', 'user', 'is_ordered', 'ordered_at',)
     
 class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer()
     order = OrderSerializer()
     class Meta:
         model = OrderItem
-        fields = '__all__'
+        fields = ('id', 'product', 'order', 'quantity', 'get_total_product_price')
