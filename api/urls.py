@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
+from payments.views import PaymentView
 
 from products.views import \
 CategoryListView, \
@@ -27,6 +28,7 @@ urlpatterns = [
     path('categories/<int:pk>', CategoryDetailView.as_view(), name='category-detail'),
     path('orders/', OrderListView.as_view(), name='order-list'),
     path('orders/<int:pk>', OrderDetailView.as_view(), name='order-detail'),
+    path('payment/', PaymentView.as_view(), name='payment'),
     # path('product-categories/', ProductCategoryList.as_view()),
     # path('product-categories/<int:pk>', ProductCategoryDetail.as_view()),
 

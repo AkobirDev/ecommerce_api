@@ -37,17 +37,17 @@ class CategoryListView(ListCreateAPIView):
 class CategoryDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAdminUser | ReadOnly]
+    permission_classes = [IsAuthenticated | ReadOnly]
 
 class OrderListView(ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
 class OrderDetailView(ListAPIView):
     # queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         order_id = self.kwargs['pk']
